@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html ng-app="app">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="assets/css/layout.css" rel="stylesheet">
+
+    <link href='//fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+
+    <title>Hybrid App</title>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="assets/js/modernizr.min.js"></script>
+    <script src="assets/js/functions.js"></script>
+
+    <!-- Angular modules !-->
+    <script src="modules/home/home.js"></script>
+    <script src="modules/comment/comment.js"></script>
+    <script src="modules/comment/CommentController.js"></script>
+    <script src="modules/comment/CommentService.js"></script>
+    <!-- /Angular modules !-->
+
+    <script src="app.js"></script>
+    <script src="app.filters.js"></script>
+    <script src="app.routes.js"></script>
+
+</head>
+<body>
+
+<!-- Page !-->
+<div id="page">
+
+    <!-- Header !-->
+    <header>
+        <i class="toggle-sidebar fa fa-bars"></i>
+        <h1>Hybrid App</h1>
+    </header>
+    <!-- /Header !-->
+
+    <!-- Sidebar !-->
+    <aside>
+        <a href="#/">Home</a>
+        <a href="#login">Login</a>
+    </aside>
+    <!-- Sidebar !-->
+
+    <!-- Content !-->
+    <section class="main-content container">
+
+        <div class="view-container">
+            <div class="view-frame" ng-view></div>
+        </div>
+
+    </section>
+    <!-- Content !-->
+
+</div>
+<!-- /Page !-->
+
+<div class="page-overlay"></div>
+
+<script>
+initApp();
+</script>
+</body>
+</html>

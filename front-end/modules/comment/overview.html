@@ -1,0 +1,33 @@
+<div class="col-md-8 col-md-offset-2">
+
+    <div class="page-header">
+        <h4>Commenting System</h4>
+        <input type="text" ng-model="query" placeholder="Reactie zoeken"></div>
+    </div>
+
+    <form class="form-stacked" ng-submit="submitComment()">
+
+        <div class="form-group">
+            <input type="text" name="author" ng-model="commentData.author" placeholder="Wat is je naam?">
+        </div>
+
+        <div class="form-group">
+            <textarea name="content" ng-model="commentData.content" placeholder="Wat denk je ervan?" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-large">Submit</button>
+        </div>
+
+    </form>
+
+    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-2x fa-spin"></span></p>
+
+    <div class="comment" ng-hide="loading" ng-repeat="comment in comments | filter:query">
+        <h3>Reactie #{{ comment.id }} <small>by {{ comment.author }}</small></h3>
+        <p>{{ comment.content }}</p>
+
+        <p><a href="#" ng-click="showComment(comment.id)" class="text-muted">Bekijken</a> <a href="#" ng-click="deleteComment(comment.id)" class="text-muted">Delete</a></p>
+    </div>
+
+</div>
