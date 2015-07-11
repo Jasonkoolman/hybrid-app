@@ -3,21 +3,23 @@
 <html ng-app="app">
 <head>
 
+    <base href="http://localhost/HybridApp/front-end/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bower_components/ionicons/css/ionicons.min.css" rel="stylesheet">
 
-    <link href="assets/css/layout.css" rel="stylesheet">
+    <link href="assets/css/app.css" rel="stylesheet">
 
     <link href='//fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
 
-    <title>Hybrid App</title>
+    <title ng-bind="title"></title>
 
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
     <script src="assets/js/modernizr.min.js"></script>
@@ -25,9 +27,15 @@
 
     <!-- Angular modules !-->
     <script src="modules/home/home.js"></script>
+    <script src="modules/home/HomeController.js"></script>
+
     <script src="modules/comment/comment.js"></script>
     <script src="modules/comment/CommentController.js"></script>
     <script src="modules/comment/CommentService.js"></script>
+
+    <script src="modules/todo/todo.js"></script>
+    <script src="modules/todo/TodoController.js"></script>
+    <script src="modules/todo/TodoService.js"></script>
     <!-- /Angular modules !-->
 
     <script src="app.js"></script>
@@ -41,28 +49,33 @@
 <div id="page">
 
     <!-- Header !-->
-    <header>
-        <i class="toggle-sidebar fa fa-bars"></i>
-        <h1>Hybrid App</h1>
+    <header id="header">
+        <a href="#" class="toggle-sidebar">
+            <i class="icon ion-android-menu"></i>
+        </a>
+        <h1 ng-bind="title"></h1>
+        <a href="#" class="toggle-form" ng-class="{'active' : showForm}" ng-show="plusIcon">
+            <i class="icon ion-plus" ng-click="showForm = !showForm"></i>
+        </a>
     </header>
     <!-- /Header !-->
 
     <!-- Sidebar !-->
-    <aside>
-        <a href="#/">Home</a>
-        <a href="#login">Login</a>
+    <aside id="sidebar">
+        <nav>
+            <a ng-href="home"><i class="icon ion-android-home"></i> Home</a>
+            <a ng-href="todo"><i class="icon ion-android-list"></i> Mijn to do's</a>
+        </nav>
     </aside>
     <!-- Sidebar !-->
 
-    <!-- Content !-->
-    <section class="main-content container">
-
+    <!-- View !-->
+    <main>
         <div class="view-container">
             <div class="view-frame" ng-view></div>
         </div>
-
-    </section>
-    <!-- Content !-->
+    </main>
+    <!-- /View !-->
 
 </div>
 <!-- /Page !-->

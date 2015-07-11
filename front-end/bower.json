@@ -13,10 +13,13 @@
     "tests"
   ],
   "dependencies": {
-    "angular-resource": "~1.4.1",
+    "angular-resource": "1.4.2",
     "angular-route": "~1.4.1",
     "jquery": "~2.1.4",
     "font-awesome": "~4.3.0",
-    "angular": "~1.4.1"
+    "angular": "~1.4.2",
+    "angular-touch": "1.4.2",
+    "angular-animate": "1.4.2",
+    "ionicons": "~2.0.1"
   }
 }

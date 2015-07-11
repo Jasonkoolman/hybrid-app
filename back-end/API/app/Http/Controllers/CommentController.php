@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Response;
 
 use App\Comment;
 
@@ -73,6 +73,6 @@ class CommentController extends Controller
     {
         Comment::destroy($id);
 
-        return Response::json(['success' => true]);
+        return response()->json(['success' => true]);
     }
 }

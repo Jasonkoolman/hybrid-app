@@ -1,10 +1,10 @@
 angular.module('comment')
 
-.controller('CommentController', ['$scope', '$http', 'Comment',
-    function($scope, $http, Comment) {
+.controller('CommentController', ['$rootScope', '$scope', '$http', 'Comment',
+    function($rootScope, $scope, $http, Comment) {
 
-        $scope.commentData = {};
-        $scope.loading = true;
+        $scope.comment = {}; // The comment form data
+        $scope.loading = true; // The loading spinner icon
 
         /*
          * Get all comments
@@ -26,11 +26,8 @@ angular.module('comment')
             $scope.loading = true;
 
             Comment.show(id)
-                .success(function(data) {
+                .success(function() {
                     $scope.getComments();
-                })
-                .error(function(data) {
-                    console.log(data);
                 });
         };
 
@@ -40,12 +37,14 @@ angular.module('comment')
         $scope.submitComment = function() {
             $scope.loading = true;
 
-            Comment.store($scope.commentData)
-                .success(function(data) {
+            Comment.store($scope.comment)
+                .success(function() {
                     $scope.getComments();
+                    $scope.comment = {};
+                    $scope.form.$setPristine();
                 })
-                .error(function(data) {
-                    console.log(data);
+                .error(function() {
+                    $scope.loading = false;
                 });
         };
 
@@ -56,11 +55,8 @@ angular.module('comment')
             $scope.loading = true;
 
             Comment.destroy(id)
-                .success(function(data) {
+                .success(function() {
                     $scope.getComments();
-                })
-                .error(function(data) {
-                    console.log(data);
                 });
         };
 

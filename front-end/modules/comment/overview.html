@@ -5,14 +5,15 @@
         <input type="text" ng-model="query" placeholder="Reactie zoeken"></div>
     </div>
 
-    <form class="form-stacked" ng-submit="submitComment()">
+    <!-- Comment form !-->
+    <form name="form" ng-submit="submitComment()" class="form-stacked" novalidate>
 
-        <div class="form-group">
-            <input type="text" name="author" ng-model="commentData.author" placeholder="Wat is je naam?">
+        <div class="form-group" ng-class="{'has-error' : form.author.$invalid && form.$submitted}">
+            <input type="text" name="author" ng-model="comment.author" class="validate" placeholder="Wat is je naam?" ng-minlength="3" required>
         </div>
 
-        <div class="form-group">
-            <textarea name="content" ng-model="commentData.content" placeholder="Wat denk je ervan?" rows="5"></textarea>
+        <div class="form-group" ng-class="{'has-error' : form.content.$invalid && form.$submitted}">
+            <textarea name="content" ng-model="comment.content" class="validate" placeholder="Wat denk je ervan?" rows="5" ng-minlength="10" required></textarea>
         </div>
 
         <div class="form-group">
@@ -20,14 +21,26 @@
         </div>
 
     </form>
+    <!-- /Comment form !-->
 
+    <!-- Comments !-->
     <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-2x fa-spin"></span></p>
 
-    <div class="comment" ng-hide="loading" ng-repeat="comment in comments | filter:query">
-        <h3>Reactie #{{ comment.id }} <small>by {{ comment.author }}</small></h3>
-        <p>{{ comment.content }}</p>
-
-        <p><a href="#" ng-click="showComment(comment.id)" class="text-muted">Bekijken</a> <a href="#" ng-click="deleteComment(comment.id)" class="text-muted">Delete</a></p>
+    <div class="comments">
+        <div class="comment" ng-hide="loading" ng-repeat="comment in comments | filter:query">
+            <h3>Reactie #{{ comment.id }} <small>by {{ comment.author }}</small></h3>
+            <p>{{ comment.content }}</p>
+            <p><a href="#" ng-click="showComment(comment.id)" class="text-muted">Bekijken</a> <a href="#" ng-click="deleteComment(comment.id)" class="text-muted">Delete</a></p>
+        </div>
     </div>
+    <!-- Comments  !-->
+
+<div ng-show="!showActions" ng-swipe-left="showActions = true">
+    Some list content, like an email in the inbox<br>more
+</div>
+<div ng-show="showActions" ng-swipe-right="showActions = false">
+    <button ng-click="reply()">Reply</button>
+    <button ng-click="delete()">Delete</button>
+</div>
 
 </div>

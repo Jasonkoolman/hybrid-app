@@ -9,7 +9,8 @@ function initApp() {
  * Initializes the use of the sidebar
  */
 function initSidebar() {
-    $('.toggle-sidebar, .page-overlay').click(function() {
+    $('.toggle-sidebar, .page-overlay').click(function(e) {
+        e.preventDefault();
         toggleSidebar();
     });
 
@@ -19,7 +20,7 @@ function initSidebar() {
 
     function toggleSidebar() {
         $('aside').toggleClass('active');
-        $('.page-overlay').fadeToggle();
+        $('.page-overlay').fadeToggle(300);
     }
 }
 

@@ -43,3 +43,12 @@
         </div>
     </body>
 </html>
+
+<ul>
+    <?php foreach($frameworks as $framework): ?>
+    <li title="<?php echo $framework->description ?>">
+        <?php echo $framework->name ?>
+    </li>
+    <?php endforeach ?>
+</ul>
+

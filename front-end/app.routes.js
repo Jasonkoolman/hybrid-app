@@ -1,6 +1,6 @@
 angular.module('app')
 
-.config(['$routeProvider', function ($routeProvider) {
+.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
 
         /**
@@ -8,6 +8,8 @@ angular.module('app')
          */
         .when('/',
         {
+            title: 'Hybrid App',
+            controller: 'HomeController',
             templateUrl: 'modules/home/home.html'
         })
 
@@ -16,14 +18,35 @@ angular.module('app')
          */
         .when('/comment/',
         {
+            title: 'Reacties',
             controller: 'CommentController',
             templateUrl: 'modules/comment/overview.html'
         })
-        .when('/comment/:id',
+
+        /**
+         * To-do module
+         */
+        .when('/todo/',
         {
-            controller: 'CommentController',
-            templateUrl: 'modules/comment/show.html'
+            title: 'Mijn to do\'s',
+            controller: 'TodoController',
+            templateUrl: 'modules/todo/overview.html'
+        })
+        .when('/todo/:id',
+        {
+            title: 'To do',
+            controller: 'TodoController',
+            templateUrl: 'modules/todo/show.html'
         })
 
         .otherwise({ redirectTo: '/' });
+
+    $locationProvider.html5Mode(true);
+}])
+
+.run(['$location', '$rootScope', function($location, $rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+        var currentRoute = current.$$route;
+        $rootScope.title = (currentRoute !== undefined) ? currentRoute.title : 'Hybrid App';
+    });
 }]);

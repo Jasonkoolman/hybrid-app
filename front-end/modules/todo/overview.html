@@ -1,0 +1,58 @@
+<!-- Task form !-->
+<div class="form-container form-container-floating" ng-class="{'active' : showForm}">
+    <form name="form" ng-submit="submitTask()" class="form-stacked" novalidate>
+
+        <div class="form-group" ng-class="{'has-error': form.content.$invalid && form.$submitted}">
+            <textarea name="content" ng-model="task.content" placeholder="Wat moet je doen?" rows="5" ng-minlength="10" required></textarea>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.priority.$invalid && form.$submitted}">
+            <select name="priority" ng-model="task.priority" required>
+                <option value="">Geef de prioriteit aan</option>
+                <option value="high">Hoge prioriteit</option>
+                <option value="medium">Normale prioriteit</option>
+                <option value="low" selected>Lage prioriteit</option>
+            </select>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.location.$invalid && form.$submitted}">
+            <input type="text" name="location" ng-model="task.location" placeholder="Waar?">
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.time.$invalid && form.$submitted}">
+            <input type="text" name="time" ng-model="task.time" placeholder="Wanneer?">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-medium">Toevoegen</button>
+        </div>
+
+    </form>
+</div>
+<!-- /Task form !-->
+
+<!-- Tasks list !-->
+<ul class="tasks-list" ng-hide="loading">
+
+    <li class="task {{ task.priority }}-priority" ng-repeat="task in tasks | filter:query" ng-swipe-right="deleteTask(task.id)">
+        <div class="task-content">
+            <div class="task-meta clearfix">
+                <span><i class="icon ion-android-time"></i> {{ task.time }}</span>
+                <span><i class="icon ion-location"></i> {{ task.location }}</span>
+            </div>
+            {{ task.content }}
+        </div>
+        <div class="task-checkbox">
+            <input id="task{{ task.id }}" type="checkbox" name="completed" ng-model="task.completed" ng-change="completeTask(task)" ng-checked="task.completed" ng-true-value="1" ng-false-value="0">
+            <label for="task{{ task.id }}">
+                <span><i class="icon ion-android-checkmark-circle"></i></span>
+            </label>
+        </div>
+        <div class="task-actions" ng-show="showActions" ng-swipe-right="showActions = false">
+            <button ng-click="reply()">Reply</button>
+            <button ng-click="delete()">Delete</button>
+        </div>
+    </li>
+
+</ul>
+<!-- /Tasks list  !-->
+
+<div class="spinner" ng-show="loading">
+    <span></span>
+</div>

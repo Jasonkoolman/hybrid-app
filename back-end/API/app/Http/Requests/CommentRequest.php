@@ -24,7 +24,8 @@ class CommentRequest extends Request
     public function rules()
     {
         return [
-            //
+            'content' => 'required|string',
+            'author' => 'required|string'
         ];
     }
 }
